@@ -53,11 +53,9 @@ class YoloHandlerDarknet(YoloHandler):
     Yolo34py library implementation of our yolo model
     """
 
-    def __init__(self, config, model_path):
+    def __init__(self, model_path):
         """
         Yolo constructor
-
-        :param config: vision config dict
         :param model_path: path to the yolo model
         """
         # Define more paths
@@ -68,15 +66,13 @@ class YoloHandlerDarknet(YoloHandler):
         # Generates a dummy file for the library
         self._generate_dummy_obj_data_file(namepath)
 
-        self._config = config
-
         # Setup detector
         self._net = Detector(bytes(configpath, encoding="utf-8"), bytes(weightpath, encoding="utf-8"), 0.5,
                              bytes(datapath, encoding="utf-8"))
         # Set cached stuff
         self._image = None
         self._results = None
-        super(YoloHandlerDarknet, self).__init__(config, model_path)
+        super(YoloHandlerDarknet, self).__init__(model_path)
 
     def _generate_dummy_obj_data_file(self, obj_name_path):
         """
