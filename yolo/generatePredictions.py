@@ -4,7 +4,7 @@ import cv2
 import yolohandler
 
 # Todo don't hardcode this
-directory = "insert path to directory here"
+directory = "insert path to images here"
 imagelist = []
 
 # define the used labels
@@ -42,6 +42,8 @@ for index, image in enumerate(imagelist):
         if labels[candidate[5]] == "ball":
             vector = f"""{{"x1": {x}, "y1": {y}, "x2": {x + width}, "y2": {y + height}}}"""
         elif labels[candidate[5]] == "goalpost":
+            # ignore goalposts for now, since the yolo bounding box is inaccurate if it is a tilted goalpost
+            continue
             vector = f"""{{"x1": {x}, "y1": {y}, "x2": {x + width}, "y2": {y},""" \
                      f""""x3": {x+width}, "y3": {y+height}, "x4": {x}, "y4": {y+height}}}"""
         else:
