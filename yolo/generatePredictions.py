@@ -24,7 +24,9 @@ for index, image in enumerate(imagelist):
     # \r and end="" so the same line is used again
     print(f"\rpredicting for image {index+1}/{len(imagelist)}", end="")
     img = cv2.imread(str(image))
-    yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
+    # if yolo34py installation doesn't work for some reason, this is here as fallback, comment in if needed
+    #yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
+    yolo = yolohandler.YoloHandlerDarknet("yoloConfig")
     yolo.set_image(image = img)
     yolo.predict()
     result = yolo.get_candidates()
