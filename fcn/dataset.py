@@ -71,7 +71,7 @@ class roboCupDatasets(Dataset):
         return torch.from_numpy(img), torch.from_numpy(label)
 
     def __len__(self):
-        len(self.imagelist)
+        return len(self.imagelist)
 
 if __name__ == "__main__":
     a = roboCupDatasets()
