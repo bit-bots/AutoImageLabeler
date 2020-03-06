@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 import torch
 from pathlib import Path
+import os
 
 class roboCupDatasets(Dataset):
 
@@ -63,7 +64,9 @@ class roboCupDatasets(Dataset):
                     cv2.imwrite(outputImages + imagename, readImg)
                     # multiplying by 255 makes the labels visible on the output images
                     # label = label * 255
-                    cv2.imwrite(outputSegmentations + imagename, label)
+                    labelname, _ = os.path.splitext(imagename)
+                    labelname = labelname + ".png"
+                    cv2.imwrite(outputSegmentations + labelname, label)
                     # self.imagelist.append((imagepath, label))
 
 if __name__ == "__main__":
