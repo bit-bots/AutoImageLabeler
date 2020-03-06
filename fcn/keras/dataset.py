@@ -45,17 +45,22 @@ class roboCupDatasets(Dataset):
                     # create black image with same dimensions as input image
                     label = np.zeros((height,width, channels)).astype('uint8')
                     labelFound = False
+                    notinimage = False
                     for annotation in image[1]["annotations"]:
                         if annotation["type"] in labelsToUse:
                             labelFound = True
                             polygon = annotation["vector"]
                             # TODO think about this:
                             if "notinimage" in polygon:
+                                notinimage = True
                                 continue
                             if not "notinimage" in polygon:
                                 cv2.fillConvexPoly(label, np.array(polygon), [1,1,1])
                     # only use images where we have labels available (notinimage is a label too)
                     if not labelFound:
+                        continue
+                    # TODO do we want to skip on not in image?
+                    if notinimage:
                         continue
                     # Debug Labels:
                     # cv2.imshow("label", label)
