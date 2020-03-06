@@ -49,6 +49,9 @@ class roboCupDatasets(Dataset):
                         if annotation["type"] in labelsToUse:
                             labelFound = True
                             polygon = annotation["vector"]
+                            # TODO think about this:
+                            if "notinimage" in polygon:
+                                continue
                             if not "notinimage" in polygon:
                                 cv2.fillConvexPoly(label, np.array(polygon), [1,1,1])
                     # only use images where we have labels available (notinimage is a label too)
