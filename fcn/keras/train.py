@@ -1,10 +1,10 @@
-from keras_segmentation.models.unet import vgg_unet
+from keras_segmentation.models.segnet import mobilenet_segnet
 
-model = vgg_unet(n_classes=2)
+model = mobilenet_segnet(n_classes=2)
 
 model.train(
-    train_images = "./labeled/train_images",
-    train_annotations = "./labeled/train_segmentation",
+    train_images = "/srv/ssd_nvm/15hagge/labeled/train_images/",
+    train_annotations = "/srv/ssd_nvm/15hagge/labeled/train_segmentation/",
     checkpoints_path = "/tmp/net/",
-    epochs = 1
+    epochs = 10
 )
