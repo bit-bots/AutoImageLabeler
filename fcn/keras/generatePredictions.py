@@ -6,7 +6,7 @@ from pathlib import Path
 directory = "insert path here"
 imagelist = []
 
-labelName = "goalpost"
+annoType = "goalpost"
 model = mobilenet_unet(n_classes = 2)
 model.load_weights("./mobile.68")
 
@@ -34,9 +34,18 @@ for index, image in enumerate(imagelist):
         box = cv2.boxPoints(rect)
         box = np.int0(box)
         #cv2.drawContours(prediction, [box], 0, (0, 0, 255), 2)
-        print(box)
+        vector = f"""{{"x1": {box[0][1]}, "y1": {box[0][0]}, "x2": {box[1][1]}, "y2": {box[1][0]},
+                     "x3": {box[2][1]}, "y3": {box[2][0]}, "x4": {box[3][1]}, "y4": {box[3][0]}}}"""
+        vectorlist.append(vector)
+        print(vector)
 
     #cv2.imshow("foo", prediction)
     #cv2.waitKey(0)
 
-'''
+    imagename = image.name
+    with open("output.txt", "a") as f:
+        for candidate in vectorlist:
+            imagetaggerformat = f"{imagename}|{annoType}|{candidate}|\n"
+            f.write(imagetaggerformat)
+
+
