@@ -6,7 +6,7 @@ from pathlib import Path
 directory = "insert path here"
 imagelist = []
 
-
+labelName = "goalpost"
 model = mobilenet_unet(n_classes = 2)
 model.load_weights("./mobile.68")
 
@@ -23,19 +23,12 @@ for index, image in enumerate(imagelist):
     print(str(image))
     prediction = model.predict_segmentation(inp=img, out_fname="/tmp/stuff.png")
     prediction = cv2.imread("/tmp/stuff.png", cv2.IMREAD_GRAYSCALE)
-    # TODO hardcoded values for now
-    #prediction = keras_segmentation.predict.visualize_segmentation(prediction, img, n_classes = 2, prediction_width = img.shape[1], prediction_height = img.shape[0])
-    #print(prediction.shape)
-    #prediction = cv2.cvtColor(prediction, cv2.COLOR_BGR2GRAY)
-    #print(prediction)
-    #cv2.imshow("foo", prediction)
-    #cv2.waitKey(0)
-    #prediction = prediction.astype(np.uint8)
-    #prediction = prediction * 255
+
+    # the following taken from https://docs.opencv.org/trunk/dd/d49/tutorial_py_contour_features.html (7.b)
     ret, thresh = cv2.threshold(prediction, 155, 255, cv2.THRESH_BINARY)
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    #contours, hierarchy = cv2.findContours(prediction, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
+    vectorlist = []
     for cnt in contours:
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
