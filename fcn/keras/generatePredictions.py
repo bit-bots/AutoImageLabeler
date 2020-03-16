@@ -34,14 +34,14 @@ for index, image in enumerate(imagelist):
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
         box = np.int0(box)
-        if math.sqrt((box[0][0] - box[2][0]) ** 2 + (box[0][1] - box[2][1]) ** 2) < 20:
-            pass
-        print(math.sqrt((box[0][0] - box[2][0]) ** 2 + (box[0][1] - box[2][1]) ** 2))
+        if math.sqrt((box[0][0] - box[2][0]) ** 2 + (box[0][1] - box[2][1]) ** 2) < 50:
+            continue
+        #print(math.sqrt((box[0][0] - box[2][0]) ** 2 + (box[0][1] - box[2][1]) ** 2))
         #cv2.drawContours(prediction, [box], 0, (0, 0, 255), 2)
         vector = f"""{{"x1": {box[0][0]}, "y1": {box[0][1]}, "x2": {box[1][0]}, "y2": {box[1][1]},"""\
                  f""""x3": {box[2][0]}, "y3": {box[2][1]}, "x4": {box[3][0]}, "y4": {box[3][1]}}}"""
         vectorlist.append(vector)
-        print(vector)
+        #print(vector)
 
     #cv2.imshow("foo", prediction)
     #cv2.waitKey(0)
