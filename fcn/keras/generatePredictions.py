@@ -33,28 +33,10 @@ for index, image in enumerate(imagelist):
         rect = cv2.minAreaRect(cnt)
         box = cv2.boxPoints(rect)
         box = np.int0(box)
-        cv2.drawContours(prediction, [box], 0, (0, 0, 255), 2)
+        #cv2.drawContours(prediction, [box], 0, (0, 0, 255), 2)
         print(box)
 
-    cv2.imshow("foo", prediction)
-    cv2.waitKey(0)
+    #cv2.imshow("foo", prediction)
+    #cv2.waitKey(0)
 
-
-'''
-im = cv2.imread("/home/jonas/Downloads/bar.png", cv2.IMREAD_GRAYSCALE)
-
-ret, thresh = cv2.threshold(im, 155, 255, cv2.THRESH_BINARY)
-
-contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-for cnt in contours:
-    rect = cv2.minAreaRect(cnt)
-    box = cv2.boxPoints(rect)
-    box = np.int0(box)
-    cv2.drawContours(im,[box],0,(0,0,255),2)
-    print(box)
-
-
-cv2.imshow("foo", im)
-cv2.waitKey(0)
 '''
