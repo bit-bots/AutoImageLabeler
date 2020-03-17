@@ -26,7 +26,9 @@ for index, image in enumerate(imagelist):
     prediction = cv2.imread("/tmp/stuff.png", cv2.IMREAD_GRAYSCALE)
 
     # the following taken from https://docs.opencv.org/trunk/dd/d49/tutorial_py_contour_features.html (7.b)
-    ret, thresh = cv2.threshold(prediction, 155, 255, cv2.THRESH_BINARY)
+    # everything below 155 seems to be background. 
+    # 210 makes for better fitting bounding boxes on one test set. Might have to evaluate further
+    ret, thresh = cv2.threshold(prediction, 210, 255, cv2.THRESH_BINARY)
     contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     vectorlist = []
