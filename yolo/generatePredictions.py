@@ -4,7 +4,7 @@ import cv2
 import yolohandler
 
 # Todo don't hardcode this
-directory = "insert path to images here"
+directory = "/homes/15hagge/AutoImageLabeler/data"
 imagelist = []
 
 # define the used labels

@@ -1,10 +1,11 @@
 import cv2
 import numpy as np
 from keras_segmentation.models.unet import mobilenet_unet
+import keras_segmentation
 from pathlib import Path
 import math
 
-directory = "insert path here"
+directory = "/srv/ssd_nvm/15hagge/testset/375/"
 imagelist = []
 
 annoType = "goalpost"

@@ -12,11 +12,11 @@ model.train(
 '''
 
 train.train(model,
-    train_images = "/srv/ssd_nvm/15hagge/labeled/train_images/",
-    train_annotations = "/srv/ssd_nvm/15hagge/labeled/train_segmentation/",
-    checkpoints_path = "/tmp/net/mobile",
-    epochs = 20,
+    train_images = "/srv/ssd_nvm/15hagge/goalposts/train_images/",
+    train_annotations = "/srv/ssd_nvm/15hagge/goalposts/train_segmentation/",
+    checkpoints_path = "/homes/15hagge/AutoImageLabeler/fcn/keras/nets/mobile",
+    epochs = 70,
     #ignore_zero_class = True ,
-    gen_use_multiprocessing = True ,
+    gen_use_multiprocessing = True,
     batch_size = 15
 )

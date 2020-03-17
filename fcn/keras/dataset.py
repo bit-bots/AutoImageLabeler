@@ -12,7 +12,7 @@ import os
 
 class roboCupDatasets(Dataset):
 
-    def __init__(self, rootDataDirectory = "/srv/ssd_nvm/15hagge/data/", outputDirectory= "/srv/ssd_nvm/15hagge/labeled", labelsToUse = ["goalpost"]):
+    def __init__(self, rootDataDirectory = "/homes/15hagge/AutoImageLabeler/data/goalposts", outputDirectory= "/srv/ssd_nvm/15hagge/goalposts", labelsToUse = ["goalpost"]):
         """
         Args:
             rootDataDirectory (string): path to directory of directory with images
