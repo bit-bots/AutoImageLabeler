@@ -52,7 +52,7 @@ for index, image in enumerate(imagelist):
             maxx = 0
             maxy = 0
             # get min / max values for both axis to determine bounding box
-            for coordinate in vector:
+            for coordinate in box:
                 if coordinate[0] < minx:
                     minx = coordinate[0]
                 if coordinate[0] > maxx:
