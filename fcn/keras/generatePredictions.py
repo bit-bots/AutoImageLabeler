@@ -62,10 +62,13 @@ for index, image in enumerate(imagelist):
                 if coordinate[1] > maxy:
                     maxy = coordinate[1]
             vector = f"""{{"x1": {minx}, "y1": {miny}, "x2": {maxx}, "y2": {maxy}}}"""
+        else:
+            print("unknown label type")
         vectorlist.append(vector)
         # print(vector)
 
-    #cv2.imshow("foo", prediction)
+    #cv2.imshow("img", img)
+    #cv2.imshow("prediction", prediction)
     #cv2.waitKey(0)
 
     imagename = image.name
