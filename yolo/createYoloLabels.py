@@ -14,6 +14,8 @@ print("The following datasets will be considered:")
 for d in datasets:
     print(d)
 
+trainImages = []  # this ensures only images with labels are used
+
 for d in datasets:
     yamlfile = glob.glob(f"{d}/*.yaml")
     if len(yamlfile) > 1:
@@ -24,6 +26,7 @@ for d in datasets:
 
 
     for name, frame in export['images'].items():
+        trainImages.append(f"{d}/{name}")
         annolist = []
         for annotation in frame['annotations']:
             if not (annotation['vector'][0] == 'notinimage'):
@@ -57,5 +60,7 @@ for d in datasets:
         with open(d + "/" + imgname + ".txt", "w+") as output:
             for e in annolist:
                 output.write(e + "\n")
-
+with open(f"{directory}/train.txt", "w") as traintxt:
+    for e in trainImages:
+        traintxt.write(e + "\n")
 
