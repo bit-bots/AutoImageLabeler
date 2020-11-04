@@ -60,6 +60,8 @@ for d in datasets:
         with open(d + "/" + imgname + ".txt", "w+") as output:
             for e in annolist:
                 output.write(e + "\n")
+
+trainImages = set(trainImages) # prevent images from showing up twice
 with open(f"{directory}/train.txt", "w") as traintxt:
     for e in trainImages:
         traintxt.write(e + "\n")
