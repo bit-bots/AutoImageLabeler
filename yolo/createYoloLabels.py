@@ -4,7 +4,7 @@ import sys
 
 import yaml
 
-if sys.argv[0] == None:
+if len(sys.argv[0]) == 0:
     directory = input("absolute path to root of your datasets:")
 else:
     directory = sys.argv[1]
