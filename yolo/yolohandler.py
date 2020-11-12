@@ -82,7 +82,8 @@ class YoloHandlerDarknet(YoloHandler):
         :param obj_name_path: path to the class name file
         """
         # Generate file content
-        obj_data = "classes = 52\nnames = " + obj_name_path
+        # TODO somehow detect number of classes
+        obj_data = "classes = 2\nnames = " + obj_name_path
         # Write file
         with open('/tmp/obj.data', 'w') as f:
             f.write(obj_data)

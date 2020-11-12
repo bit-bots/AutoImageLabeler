@@ -1,10 +1,11 @@
 import sys
+import os
 from pathlib import Path
 import cv2
 import yolohandler
 
 # Todo don't hardcode this
-directory = "/homes/15hagge/AutoImageLabeler/data"
+directory = "/tmp/imgs"
 imagelist = []
 
 # define the used labels
@@ -26,7 +27,7 @@ for index, image in enumerate(imagelist):
     img = cv2.imread(str(image))
     # if yolo34py installation doesn't work for some reason, this is here as fallback, comment in if needed
     #yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
-    yolo = yolohandler.YoloHandlerDarknet("yoloConfig")
+    yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
     yolo.set_image(image = img)
     yolo.predict()
     result = yolo.get_candidates()
