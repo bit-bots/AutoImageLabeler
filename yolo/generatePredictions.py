@@ -8,10 +8,10 @@ directory = "/tmp/imgs"
 imagelist = []
 
 # define the used labels
-# It is important to use the same order for the objects as in your .names file!
 labels = []
-labels.append("ball")
-labels.append("goalpost")
+with open("yoloConfig/obj.names") as f:
+    for line in f:
+      labels.append(line.strip())
 
 # TODO find png and jpg in one command
 for filename in Path(directory).rglob("*.png"):
