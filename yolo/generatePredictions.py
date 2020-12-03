@@ -41,7 +41,7 @@ for index, image in enumerate(imagelist):
         width = candidate[2]
         height = candidate[3]
 
-        if labels[candidate[5]] == "ball":
+        if labels[candidate[5]] == "ball" or labels[candidate[5]] == "robot":
             vector = f"""{{"x1": {x}, "y1": {y}, "x2": {x + width}, "y2": {y + height}}}"""
         elif labels[candidate[5]] == "goalpost":
             # ignore goalposts for now, since the yolo bounding box is inaccurate if it is a tilted goalpost
