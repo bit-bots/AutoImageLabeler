@@ -4,15 +4,14 @@ import cv2
 import yolohandler
 
 # Todo don't hardcode this
-directory = "/homes/15hagge/AutoImageLabeler/data"
+directory = "/tmp/imgs"
 imagelist = []
 
 # define the used labels
-# It is important to use the same order for the objects as in your .names file!
-# TODO just read this from the .names file
 labels = []
-labels.append("robot")
-
+with open("yoloConfig/obj.names") as f:
+    for line in f:
+      labels.append(line.strip())
 
 for filename in Path(directory).rglob("*.png"):
     imagelist.append(filename)
@@ -21,8 +20,8 @@ for filename in Path(directory).rglob("*.jpg"):
 print(f"Found {len(imagelist)} images in {directory}")
 
 # if yolo34py installation doesn't work for some reason, this is here as fallback, comment in if needed
-# yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
-yolo = yolohandler.YoloHandlerDarknet("yoloConfig")
+yolo = yolohandler.YoloHandlerOpenCV("yoloConfig")
+# yolo = yolohandler.YoloHandlerDarknet("yoloConfig")
 for index, image in enumerate(imagelist):
     # \r and end="" so the same line is used again
     print(f"\rpredicting for image {index+1}/{len(imagelist)}", end="")
