@@ -11,8 +11,8 @@ imagelist = []
 # It is important to use the same order for the objects as in your .names file!
 # TODO just read this from the .names file
 labels = []
-labels.append("ball")
-labels.append("goalpost")
+labels.append("robot")
+
 
 for filename in Path(directory).rglob("*.png"):
     imagelist.append(filename)
