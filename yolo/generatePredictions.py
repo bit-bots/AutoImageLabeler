@@ -9,11 +9,11 @@ imagelist = []
 
 # define the used labels
 # It is important to use the same order for the objects as in your .names file!
+# TODO just read this from the .names file
 labels = []
 labels.append("ball")
 labels.append("goalpost")
 
-# TODO find png and jpg in one command
 for filename in Path(directory).rglob("*.png"):
     imagelist.append(filename)
 for filename in Path(directory).rglob("*.jpg"):
@@ -53,6 +53,7 @@ for index, image in enumerate(imagelist):
         vectorlist.append((candidate[5], vector))
 
     imagename = image.name
+    # TODO delete two next lines?
     annoType = None
     vector = None
 
