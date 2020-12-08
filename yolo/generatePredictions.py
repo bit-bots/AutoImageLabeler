@@ -51,6 +51,9 @@ for index, image in enumerate(imagelist):
         else:
             print("An unknown annotation type was used. You might want to check what happened")
         vectorlist.append((candidate[5], vector))
+    if len(result) == 0:
+        for i, label in enumerate(labels):
+            vectorlist.append(i, "not in image")
 
     imagename = image.name
     # TODO delete two next lines?
