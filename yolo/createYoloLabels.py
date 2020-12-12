@@ -49,8 +49,11 @@ for d in datasets:
                         relcenter_x = center_x / imgwidth
                         relcenter_y = center_y / imgheight
 
-                        if annotation['type'] == "robot":
+                        # TODO this needs to be changed from hand for now
+                        if annotation['type'] == "ball":
                             classid = 0
+                        if annotation['type'] == "goalpost":
+                            classid = 1
 
                         annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
                     else:
