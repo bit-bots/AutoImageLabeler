@@ -32,32 +32,31 @@ for d in datasets:
             if not (annotation['vector'][0] == 'notinimage'):
                 imgwidth = frame['width']
                 imgheight = frame['height']
-                for annotation in frame['annotations']:
-                    if not (annotation['vector'][0] == 'notinimage'):
-                        min_x = min(map(lambda x: x[0], annotation['vector']))
-                        max_x = max(map(lambda x: x[0], annotation['vector']))
-                        min_y = min(map(lambda x: x[1], annotation['vector']))
-                        max_y = max(map(lambda x: x[1], annotation['vector']))
+                if not (annotation['vector'][0] == 'notinimage'):
+                    min_x = min(map(lambda x: x[0], annotation['vector']))
+                    max_x = max(map(lambda x: x[0], annotation['vector']))
+                    min_y = min(map(lambda x: x[1], annotation['vector']))
+                    max_y = max(map(lambda x: x[1], annotation['vector']))
 
-                        annowidth = max_x - min_x
-                        annoheight = max_y - min_y
-                        relannowidth = annowidth / imgwidth
-                        relannoheight = annoheight / imgheight
+                    annowidth = max_x - min_x
+                    annoheight = max_y - min_y
+                    relannowidth = annowidth / imgwidth
+                    relannoheight = annoheight / imgheight
 
-                        center_x = min_x + (annowidth / 2)
-                        center_y = min_y + (annoheight / 2)
-                        relcenter_x = center_x / imgwidth
-                        relcenter_y = center_y / imgheight
+                    center_x = min_x + (annowidth / 2)
+                    center_y = min_y + (annoheight / 2)
+                    relcenter_x = center_x / imgwidth
+                    relcenter_y = center_y / imgheight
 
-                        # TODO this needs to be changed from hand for now
-                        if annotation['type'] == "ball":
-                            classid = 0
-                        if annotation['type'] == "goalpost":
-                            classid = 1
+                    # TODO this needs to be changed from hand for now
+                    if annotation['type'] == "ball":
+                        classid = 0
+                    if annotation['type'] == "goalpost":
+                        classid = 1
 
-                        annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
-                    else:
-                        pass
+                    annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
+                else:
+                    pass
 
         imgname = name.replace(".png", "").replace(".jpg", "")
         with open(d + "/" + imgname + ".txt", "w+") as output:
