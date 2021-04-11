@@ -54,8 +54,8 @@ for d in datasets:
                         # so we assume the point is in the middle
                         # and then make a box of 5% of the image in all directions
                         coords = annotation['vector'][0]
-                        relcenter_x = coords[0]
-                        relcenter_y = coords[1]
+                        relcenter_x = coords[0] / imgwidth
+                        relcenter_y = coords[1] / imgheight
                         relannowidth = 0.05
                         relannoheight = 0.05
 
