@@ -15,6 +15,7 @@ for d in datasets:
     print(d)
 
 trainImages = []  # this ensures only images with labels are used
+line_intersections = ["L-Intersection", "T-Intersection", "X-Intersection"]
 
 for d in datasets:
     yamlfile = glob.glob(f"{d}/*.yaml")
@@ -24,7 +25,6 @@ for d in datasets:
     with open(yamlfile[0]) as f:
         export = yaml.safe_load(f)
 
-
     for name, frame in export['images'].items():
         trainImages.append(f"{d}/{name}")
         annolist = []
@@ -33,26 +33,49 @@ for d in datasets:
                 imgwidth = frame['width']
                 imgheight = frame['height']
                 if not (annotation['vector'][0] == 'notinimage'):
-                    min_x = min(map(lambda x: x[0], annotation['vector']))
-                    max_x = max(map(lambda x: x[0], annotation['vector']))
-                    min_y = min(map(lambda x: x[1], annotation['vector']))
-                    max_y = max(map(lambda x: x[1], annotation['vector']))
+                    if annotation['type'] not in line_intersections:
+                        min_x = min(map(lambda x: x[0], annotation['vector']))
+                        max_x = max(map(lambda x: x[0], annotation['vector']))
+                        min_y = min(map(lambda x: x[1], annotation['vector']))
+                        max_y = max(map(lambda x: x[1], annotation['vector']))
 
-                    annowidth = max_x - min_x
-                    annoheight = max_y - min_y
-                    relannowidth = annowidth / imgwidth
-                    relannoheight = annoheight / imgheight
+                        annowidth = max_x - min_x
+                        annoheight = max_y - min_y
+                        relannowidth = annowidth / imgwidth
+                        relannoheight = annoheight / imgheight
 
-                    center_x = min_x + (annowidth / 2)
-                    center_y = min_y + (annoheight / 2)
-                    relcenter_x = center_x / imgwidth
-                    relcenter_y = center_y / imgheight
+                        center_x = min_x + (annowidth / 2)
+                        center_y = min_y + (annoheight / 2)
+                        relcenter_x = center_x / imgwidth
+                        relcenter_y = center_y / imgheight
+                    else:
+                        # line intersections are only a single coordinate
+                        # we need a bounding box though
+                        # so we assume the point is in the middle
+                        # and then make a box of 5% of the image in all directions
+                        coords = annotation['vector'][0]
+                        relcenter_x = coords[0]
+                        relcenter_y = coords[1]
+                        relannowidth = 0.05
+                        relannoheight = 0.05
+
 
                     # TODO this needs to be changed from hand for now
                     if annotation['type'] == "ball":
                         classid = 0
-                    if annotation['type'] == "goalpost":
+                    elif annotation['type'] == "goalpost":
                         classid = 1
+                    elif annotation['type'] == "robot":
+                        classid = 2
+                    elif annotation['type'] == "L-Intersection":
+                        classid = 3
+                    elif annotation['type'] == "T-Intersection":
+                        classid = 4
+                    elif annotation['type'] == "X-Intersection":
+                        classid = 5
+                    else:
+                        print(f"Unknown Annotation Type: {annotation['type']}")
+
 
                     annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
                 else:
