@@ -3,6 +3,7 @@ import glob
 import sys
 
 import yaml
+import cv2
 
 if len(sys.argv[0]) == 0:
     directory = input("absolute path to root of your datasets:")
@@ -29,9 +30,16 @@ for d in datasets:
         trainImages.append(f"{d}/{name}")
         annolist = []
         for annotation in frame['annotations']:
-            if not (annotation['vector'][0] == 'notinimage'):
-                imgwidth = frame['width']
-                imgheight = frame['height']
+            if not annotation.get('in_image') == False and not (annotation.get('vector')[0] == 'notinimage'):
+                if frame.get('width') and frame.get('height'):
+                    imgwidth = frame['width']
+                    imgheight = frame['height']
+                # in some YAMLS the width and height is not given
+                # then we need to calculate it ourselves by looking at the image
+                else:
+                    img_full_path = os.path.join(d, name)
+                    im = cv2.imread(img_full_path)
+                    imgheight, imgwidth, _ = im.shape
                 if not (annotation['vector'][0] == 'notinimage'):
                     if annotation['type'] not in line_intersections:
                         min_x = min(map(lambda x: x[0], annotation['vector']))
@@ -61,6 +69,8 @@ for d in datasets:
 
 
                     # TODO this needs to be changed from hand for now
+                    # image tagger types
+                    '''
                     if annotation['type'] == "ball":
                         classid = 0
                     elif annotation['type'] == "goalpost":
@@ -75,6 +85,21 @@ for d in datasets:
                         classid = 5
                     else:
                         print(f"Unknown Annotation Type: {annotation['type']}")
+                    '''
+
+                    if annotation['type'] == "ball":
+                        classid = 0
+                    # we only learn goalposts, so the side doesn't matter to us
+                    elif annotation['type'] == "right_goalpost" or annotation['type'] == "left_goalpost":
+                        classid = 1
+                    elif annotation['type'] == "robot":
+                        classid = 2
+                    elif annotation['type'] == "top_bar":
+                        classid = 3
+                    else:
+                        print(f"Unknown Annotation Type: {annotation['type']}")
+
+
 
 
                     annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
