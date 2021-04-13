@@ -90,7 +90,7 @@ for d in datasets:
                     if annotation['type'] == "ball":
                         classid = 0
                     # we only learn goalposts, so the side doesn't matter to us
-                    elif annotation['type'] == "right_goalpost" or annotation['type'] == "left_goalpost":
+                    elif annotation['type'] == "goalpost":
                         classid = 1
                     elif annotation['type'] == "robot":
                         classid = 2
