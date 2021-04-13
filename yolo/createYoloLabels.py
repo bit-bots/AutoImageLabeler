@@ -70,7 +70,6 @@ for d in datasets:
 
                     # TODO this needs to be changed from hand for now
                     # image tagger types
-                    '''
                     if annotation['type'] == "ball":
                         classid = 0
                     elif annotation['type'] == "goalpost":
@@ -83,23 +82,10 @@ for d in datasets:
                         classid = 4
                     elif annotation['type'] == "X-Intersection":
                         classid = 5
-                    else:
-                        print(f"Unknown Annotation Type: {annotation['type']}")
-                    '''
-
-                    if annotation['type'] == "ball":
-                        classid = 0
-                    # we only learn goalposts, so the side doesn't matter to us
-                    elif annotation['type'] == "goalpost":
-                        classid = 1
-                    elif annotation['type'] == "robot":
-                        classid = 2
                     elif annotation['type'] == "top_bar":
-                        classid = 3
+                        classid = 6
                     else:
                         print(f"Unknown Annotation Type: {annotation['type']}")
-
-
 
 
                     annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
