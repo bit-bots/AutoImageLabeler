@@ -37,6 +37,8 @@ for d in datasets:
                 # in some YAMLS the width and height is not given
                 # then we need to calculate it ourselves by looking at the image
                 else:
+                    #imgwidth = 1920
+                    #imgheight = 1080
                     img_full_path = os.path.join(d, name)
                     im = cv2.imread(img_full_path)
                     imgheight, imgwidth, _ = im.shape
@@ -92,7 +94,7 @@ for d in datasets:
                 else:
                     pass
 
-        imgname = name.replace(".png", "").replace(".jpg", "")
+        imgname = name.lower().replace(".png", "").replace(".jpg", "")
         with open(d + "/" + imgname + ".txt", "w+") as output:
             for e in annolist:
                 output.write(e + "\n")
