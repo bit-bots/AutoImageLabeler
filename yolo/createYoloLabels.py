@@ -94,7 +94,7 @@ for d in datasets:
                 else:
                     pass
 
-        imgname = name.lower().replace(".png", "").replace(".jpg", "")
+        imgname = name.replace(".png", "").replace(".jpg", "").replace(".PNG", "").replace(".JPG", "")
         with open(d + "/" + imgname + ".txt", "w+") as output:
             for e in annolist:
                 output.write(e + "\n")
