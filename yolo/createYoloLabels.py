@@ -84,7 +84,7 @@ for d in datasets:
                         classid = 4
                     elif annotation['type'] == "X-Intersection":
                         classid = 5
-                    elif annotation['type'] == "top_bar":
+                    elif annotation['type'] == "top_bar" or annotation['type'] == "crossbar":
                         classid = 6
                     else:
                         print(f"Unknown Annotation Type: {annotation['type']}")
