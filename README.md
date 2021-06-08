@@ -8,11 +8,33 @@ Two different methods are available.
 
 Since the used methods can be very different, we will explain them individually:
 
-YOLO
-----
+## YOLO
 
-For the YOLO method it is assumed you already have a trained YOLO that can detect your objects.
-We also assume that you only need predictions for a bounding box.
+
+### Create labels for training
+We provide a script for creating YOLO labels ([createYoloLabels.py](https://github.com/bit-bots/AutoImageLabeler/blob/master/yolo/createYoloLabels.py)) based on the [TORSO-21](https://github.com/bit-bots/TORSO_21_dataset) Dataset annotation format.
+The script currently works for the classes `ball`, `goalpost`, `robot`, `L-Intersection`, `T-Intersection`, `X-Intersection`, and the `crossbar`.
+For the intersections, we create a bounding box of 5% of the image height and 5% of the image width.
+The labels must be provided in the form of a yaml file.
+You can call the script with e.g. `python3 createYoloLabels.py /foo/imagesets`.
+The path should be an absolute path.
+You do not need to specify the path to the `.yaml` file, the script searches for them in the root directory and all subfolders of the given path.
+It assumes the `.yaml` file is in the same folder as the images for which it contains annotations.
+The script assumes your images use one of the following fileendings: `.jpg, .JPG, .png, .PNG`
+
+After calling the script, it will tell you which folders it found and the `.yaml` files it found.
+It will then create a .txt file for every image where an annotation exists in the .yaml file.
+In your root directory a `train.txt` file will be saved.
+This file contains the paths to all of your images which should be included in the training.
+As absolute paths are used, you probably need to run the script on the machine where the training will happen.
+Otherwise, the filepaths might not be correct.
+We assume if and only if an annotation (including "not in image") exists for an image, it should be used in the training.
+
+###### TL;DR
+`python3 createYoloLabels.py /absolute/path/to/imagesets/`
+
+### When you already have a trained YOLO
+We assume that you only need predictions for a bounding box.
 If you want to detect e.g. a goalpost, you probably want to use another approach to predict more precisely and make use of the precision a polygon can allow for.
 
 To use this you need to the following steps:
@@ -25,8 +47,7 @@ To use this you need to the following steps:
 1. call `` python3 generatePredictions.py``
 1. Upload the ``output.txt`` that was generated to the ImageTagger
 
-FCN (Fully Convolutional Neural Network)
-----------------------------------------
+## FCN (Fully Convolutional Neural Network)
 
 This approach can do pixel precise predictions of the objects.
 This is superior in potential accuracy compared to the YOLO approach which can only output a bounding box.
