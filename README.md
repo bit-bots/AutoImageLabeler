@@ -12,7 +12,7 @@ Since the used methods can be very different, we will explain them individually:
 
 
 ### Create labels for training
-We provide a script for creating YOLO labels ([createYoloLabels.py](https://github.com/bit-bots/AutoImageLabeler/blob/master/yolo/createYoloLabels.py)).
+We provide a script for creating YOLO labels ([createYoloLabels.py](https://github.com/bit-bots/AutoImageLabeler/blob/master/yolo/createYoloLabels.py)) based on the [TORSO-21](https://github.com/bit-bots/TORSO_21_dataset) Dataset annotation format.
 The script currently works for the classes `ball`, `goalpost`, `robot`, `L-Intersection`, `T-Intersection`, `X-Intersection`, and the `crossbar`.
 For the intersections, we create a bounding box of 5% of the image height and 5% of the image width.
 The labels must be provided in the form of a yaml file.
