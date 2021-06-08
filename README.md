@@ -33,8 +33,6 @@ We assume if and only if an annotation (including "not in image") exists for an 
 ###### TL;DR
 `python3 createYoloLabels.py /absolute/path/to/imagesets/`
 
-where `/absolute/path/to/imagesets/` is an absolute path and one level above the folders containing images.
-
 ### When you already have a trained YOLO
 We assume that you only need predictions for a bounding box.
 If you want to detect e.g. a goalpost, you probably want to use another approach to predict more precisely and make use of the precision a polygon can allow for.
