@@ -18,9 +18,7 @@ For the intersections we create a bounding box of 5% of the image height and 5% 
 The labels must be provided in the form of a yaml file.
 You can call the script with e.g. `python3 createYoloLabels.py /foo/imagesets`.
 The path should be an absolute path.
-To handle multiple imagesets the script ignores images and yaml files in the `imagesets` folder itself and expects them in subfolders.
-If you only have one imageset, then your images and yaml file need to be in e.g. `/foo/imagesets/actualImageset`.
-You do not need to specify the path to the .yaml file, the script searches for them in all subfolders of the given path.
+You do not need to specify the path to the .yaml file, the script searches for them in the root directory and all subfolders of the given path.
 It assumes the .yaml file is in the same folder as the images for which it contains annotations.
 The script assumes your images use one of the following fileendings: `.jpg, .JPG, .png, .PNG`
 
