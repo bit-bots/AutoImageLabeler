@@ -10,7 +10,6 @@ if len(sys.argv[0]) == 0:
 else:
     directory = sys.argv[1]
 datasets = [x[0] for x in os.walk(directory)]  # generate a list of all subdirectories (including root directory)
-datasets = datasets[1:]  # remove root directory
 print("The following datasets will be considered:")
 for d in datasets:
     print(d)
@@ -23,8 +22,13 @@ for d in datasets:
     if len(yamlfile) > 1:
         print(f"There was more than one yaml file in {d}, this is probably unwanted...")
         print("I will use {} now. Be careful if this is not the one you expected me to use.".format(yamlfile[0]))
-    with open(yamlfile[0]) as f:
-        export = yaml.safe_load(f)
+    if yamlfile != []: # skip folders when no yaml found
+        with open(yamlfile[0]) as f:
+            export = yaml.safe_load(f)
+    else:
+        print() #  empty line to make output more readable
+        print(f"Found no yaml in {d}")
+        continue
 
     for name, frame in export['images'].items():
         trainImages.append(f"{d}/{name}")
