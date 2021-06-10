@@ -21,7 +21,7 @@ You do not need to specify the path to the .yaml file, the script searches for t
 It assumes the .yaml file is in the same folder as the images for which it contains annotations.
 The script assumes your images use one of the following fileendings: `.jpg, .JPG, .png, .PNG`
 
-After calling the script, it will tell you which folders it found and the .yaml files it found.
+After calling the script, it will tell you which folders it found and the `.yaml` files it found.
 It will then create a .txt file for every image where an annotation exists in the .yaml file.
 In your root directory a `train.txt` file will be saved.
 This file contains the paths to all of your images which should be included in the training.
