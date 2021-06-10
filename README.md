@@ -17,9 +17,7 @@ The script currently works for the classes `ball`, `goalpost`, `robot`, `L-Inter
 For the intersections, we create a bounding box of 5% of the image height and 5% of the image width.
 The labels must be provided in the form of a yaml file.
 You can call the script with e.g. `python3 createYoloLabels.py /absolute/path/to/imagesets/`.
-To handle multiple imagesets the script ignores images and yaml files in the `imagesets` folder itself and expects them in subfolders.
-If you only have one imageset, then your images and yaml file need to be in e.g. `/foo/imagesets/actualImageset`.
-You do not need to specify the path to the .yaml file, the script searches for them in all subfolders of the given path.
+You do not need to specify the path to the .yaml file, the script searches for them in the root directory and all subfolders of the given path.
 It assumes the .yaml file is in the same folder as the images for which it contains annotations.
 The script assumes your images use one of the following fileendings: `.jpg, .JPG, .png, .PNG`
 
@@ -33,8 +31,6 @@ We assume if and only if an annotation (including "not in image") exists for an 
 
 ###### TL;DR
 `python3 createYoloLabels.py /absolute/path/to/imagesets/`
-
-where /absolute/path/to/imagesets/ is an absolute path and one level above the folders containing images.
 
 ### When you already have a trained YOLO
 We assume that you only need predictions for a bounding box.
