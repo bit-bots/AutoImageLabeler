@@ -12,12 +12,11 @@ Since the used methods can be very different, we will explain them individually:
 
 
 ### Create labels for training
-We provide [createYoloLabels.py](https://github.com/bit-bots/AutoImageLabeler/blob/master/yolo/createYoloLabels.py).
-The script currently works for the classes ball, goalpost, robot, L-Intersection, T-Intersection, X-Intersection, and the crossbar.
-For the intersections we create a bounding box of 5% of the image height and 5% of the image width.
+We provide a script for creating YOLO labels ([createYoloLabels.py](https://github.com/bit-bots/AutoImageLabeler/blob/master/yolo/createYoloLabels.py)) based on the [TORSO-21](https://github.com/bit-bots/TORSO_21_dataset) Dataset annotation format.
+The script currently works for the classes `ball`, `goalpost`, `robot`, `L-Intersection`, `T-Intersection`, `X-Intersection`, and the `crossbar`.
+For the intersections, we create a bounding box of 5% of the image height and 5% of the image width.
 The labels must be provided in the form of a yaml file.
-You can call the script with e.g. `python3 createYoloLabels.py /foo/imagesets`.
-The path should be an absolute path.
+You can call the script with e.g. `python3 createYoloLabels.py /absolute/path/to/imagesets/`.
 To handle multiple imagesets the script ignores images and yaml files in the `imagesets` folder itself and expects them in subfolders.
 If you only have one imageset, then your images and yaml file need to be in e.g. `/foo/imagesets/actualImageset`.
 You do not need to specify the path to the .yaml file, the script searches for them in all subfolders of the given path.
@@ -33,9 +32,9 @@ Otherwise, the filepaths might not be correct.
 We assume if and only if an annotation (including "not in image") exists for an image, it should be used in the training.
 
 ###### TL;DR
-`python3 createYoloLabels.py /foo/imagesets`
+`python3 createYoloLabels.py /absolute/path/to/imagesets/`
 
-where /foo/imagesets is an absolute path and one level above the folders containing images.
+where /absolute/path/to/imagesets/ is an absolute path and one level above the folders containing images.
 
 ### When you already have a trained YOLO
 We assume that you only need predictions for a bounding box.
