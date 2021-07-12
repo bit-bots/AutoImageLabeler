@@ -92,6 +92,7 @@ for d in datasets:
                         classid = 6
                     else:
                         print(f"Unknown Annotation Type: {annotation['type']}")
+                        continue
 
 
                     annolist.append("{} {} {} {} {}".format(classid, relcenter_x, relcenter_y, relannowidth, relannoheight,))
